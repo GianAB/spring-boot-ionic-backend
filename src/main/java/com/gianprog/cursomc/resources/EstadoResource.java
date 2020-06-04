@@ -9,25 +9,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gianprog.cursomc.domain.Produto;
-import com.gianprog.cursomc.services.ProdutoService;
+import com.gianprog.cursomc.domain.Estado;
+import com.gianprog.cursomc.services.EstadoService;
 
 @RestController
-@RequestMapping(value = "/produtos")
-public class ProdutoResource {
+@RequestMapping(value = "/estados")
+public class EstadoResource {
 	
 	@Autowired
-	private ProdutoService service;
-	
-	
-	@GetMapping
-	public List<Produto> findAll() {
-		List<Produto> lista = service.findAll();
-		return lista;
-	}
+	private EstadoService service;
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<?> findById(@PathVariable Integer id){
-		return ResponseEntity.ok().body(service.findById(id));
+		Estado estado = service.findById(id);
+		return ResponseEntity.ok().body(estado);
+	}
+	
+	@GetMapping
+	public List<Estado> findAll(){
+		return service.findAll();
 	}
 }
