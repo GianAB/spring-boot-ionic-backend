@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.gianprog.cursomc.domain.Produto;
 import com.gianprog.cursomc.repositories.ProdutoRepository;
+import com.gianprog.cursomc.services.exception.ObjectNotFoundException;
 
 @Service
 public class ProdutoService {
@@ -22,7 +23,8 @@ public class ProdutoService {
 	
 	public Produto findById(Integer id) {
 		Optional<Produto> obj = repository.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Classe: " + Produto.class.getName()));
 	}
 	
 	

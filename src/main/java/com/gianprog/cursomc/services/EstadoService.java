@@ -16,6 +16,10 @@ public class EstadoService {
 	@Autowired
 	EstadoRepository repository;
 	
+	public List<Estado> findAll(){
+		return repository.findAll();
+	}
+	
 	public Estado findById(Integer id) {
 		Optional<Estado> obj = repository.findById(id);
 		
@@ -23,7 +27,4 @@ public class EstadoService {
 				"Objeto não encontrado! Id: " + id + ", Classe: " + Estado.class.getName()));
 	}
 	
-	public List<Estado> findAll(){
-		return repository.findAll();
-	}
 }

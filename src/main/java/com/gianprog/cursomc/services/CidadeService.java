@@ -16,6 +16,10 @@ public class CidadeService {
 	@Autowired
 	CidadeRepository repository;
 	
+	public List<Cidade> findAll(){
+		return repository.findAll();
+	}
+	
 	public Cidade findById(Integer id) {
 		Optional<Cidade> obj = repository.findById(id);
 		
@@ -23,7 +27,4 @@ public class CidadeService {
 				"Objeto não encontrado! Id: " + id + ", Classe: " + Cidade.class.getName()));
 	}
 	
-	public List<Cidade> findAll(){
-		return repository.findAll();
-	}
 }
