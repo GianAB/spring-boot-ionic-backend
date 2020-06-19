@@ -1,5 +1,7 @@
 package com.gianprog.cursomc;
 
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +14,20 @@ import com.gianprog.cursomc.domain.Cidade;
 import com.gianprog.cursomc.domain.Cliente;
 import com.gianprog.cursomc.domain.Endereco;
 import com.gianprog.cursomc.domain.Estado;
+import com.gianprog.cursomc.domain.Pagamento;
+import com.gianprog.cursomc.domain.PagamentoComBoleto;
+import com.gianprog.cursomc.domain.PagamentoComCartao;
+import com.gianprog.cursomc.domain.Pedido;
 import com.gianprog.cursomc.domain.Produto;
+import com.gianprog.cursomc.domain.enums.EstadoPagamento;
 import com.gianprog.cursomc.domain.enums.TipoCliente;
 import com.gianprog.cursomc.repositories.CategoriaRepository;
 import com.gianprog.cursomc.repositories.CidadeRepository;
 import com.gianprog.cursomc.repositories.ClienteRepository;
 import com.gianprog.cursomc.repositories.EnderecoRepository;
 import com.gianprog.cursomc.repositories.EstadoRepository;
+import com.gianprog.cursomc.repositories.PagamentoRepository;
+import com.gianprog.cursomc.repositories.PedidoRepository;
 import com.gianprog.cursomc.repositories.ProdutoRepository;
 
 @SpringBootApplication
@@ -40,13 +49,17 @@ public class CursomcApplication implements CommandLineRunner{
 	private ClienteRepository clienteRepository;
 	
 	@Autowired
-	private EnderecoRepository enderecoRepository;
+	private EnderecoRepository enderecoRepository;	
+
+	@Autowired
+	private PagamentoRepository pagamentoRepository;
 	
+	@Autowired
+	private PedidoRepository pedidoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
-		
-		
+			
 	}
 
 	@Override
@@ -102,6 +115,26 @@ public class CursomcApplication implements CommandLineRunner{
 		clienteRepository.saveAll(Arrays.asList(cli1, cli2, cli3));
 		enderecoRepository.saveAll(Arrays.asList(end1, end2, end3, end4));
 		
+		Pedido ped1 = new Pedido(null, Instant.parse("2017-09-30T10:32:00Z"), end2, cli1);
+		cli1.getPedidos().add(ped1);
+		Pedido ped2 = new Pedido(null, Instant.parse("2017-10-10T19:35:00Z"), end1, cli2);
+		cli2.getPedidos().add(ped2);
+		Pedido ped3 = new Pedido(null, Instant.parse("2018-07-10T10:00:00Z"), end4, cli3);
+		cli3.getPedidos().add(ped3);
+		
+		Pagamento pag1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, 6);
+		ped1.setPagamento(pag1);
+		Pagamento pag2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, LocalDate.parse("2020-07-12"), null);
+		ped2.setPagamento(pag2);
+		Pagamento pag3 = new PagamentoComBoleto(null, EstadoPagamento.CANCELADO, LocalDate.parse("2020-08-01"), null);
+		ped3.setPagamento(pag3);
+		
+		pag1.setPedido(ped1);
+		pag2.setPedido(ped2);
+		pag3.setPedido(ped3);
+		
+		pedidoRepository.saveAll(Arrays.asList(ped1, ped2, ped3));
+		pagamentoRepository.saveAll(Arrays.asList(pag1, pag2, pag3));
 		
 	}
 
