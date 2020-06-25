@@ -31,20 +31,20 @@ public class PagamentoComBoleto extends Pagamento {
 		this.dataVencimento = dataVencimento;
 	}
 
-//	public Instant getDataVencimento() {
-//		return dataVencimento;
-//	}
-//
-//	public void setDataVencimento(Instant dataVencimento) {
-//		this.dataVencimento = dataVencimento;
-//	}
-//
-//	public Instant getDataPagamento() {
-//		return dataPagamento;
-//	}
-//
-//	public void setDataPagamento(Instant dataPagamento) {
-//		this.dataPagamento = dataPagamento;
-//	}
+	public LocalDate getDataVencimento() {
+		return dataVencimento;
+	}
+
+	public void setDataVencimento(LocalDate dataVencimento) {
+		this.dataVencimento = dataVencimento;
+	}
+
+	public LocalDate getDataPagamento() {
+		return dataPagamento;
+	}
+
+	public void setDataPagamento(LocalDate dataPagamento) {
+		this.dataPagamento = dataPagamento;
+	}
 
 }

@@ -2,7 +2,9 @@ package com.gianprog.cursomc.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,27 +13,31 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private Double preco;
-	
+
 	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "produto_categoria", 
-		joinColumns = @JoinColumn(name = "produto_id"),
-		inverseJoinColumns = @JoinColumn(name = "categoria_id")
-	)
+				joinColumns = @JoinColumn(name = "produto_id"), 
+				inverseJoinColumns = @JoinColumn(name = "categoria_id"))
 	private List<Categoria> categorias = new ArrayList<>();
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "id.produto")
+	private Set<ItemPedido> itens = new HashSet<>();
+
 	public Produto() {
 	}
 
@@ -41,6 +47,20 @@ public class Produto implements Serializable {
 		this.preco = preco;
 	}
 
+//	@OneToMany(mappedBy = "id.produto")
+//	public Set<ItemPedido> getItemPedidoPk() {
+//		return itens;
+//	}
+
+	@JsonIgnore
+	public List<Pedido> getPedidos() {
+		List<Pedido> pedidos = new ArrayList<>();
+		for (ItemPedido x : itens) {
+			pedidos.add(x.getPedido());
+		}
+		return pedidos;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -56,7 +76,7 @@ public class Produto implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	public Double getPreco() {
 		return preco;
 	}
@@ -64,9 +84,13 @@ public class Produto implements Serializable {
 	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
-	
+
 	public List<Categoria> getCategorias() {
 		return categorias;
+	}
+
+	public Set<ItemPedido> getItens() {
+		return itens;
 	}
 
 	@Override

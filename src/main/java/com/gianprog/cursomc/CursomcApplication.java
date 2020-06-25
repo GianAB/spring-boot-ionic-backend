@@ -14,6 +14,7 @@ import com.gianprog.cursomc.domain.Cidade;
 import com.gianprog.cursomc.domain.Cliente;
 import com.gianprog.cursomc.domain.Endereco;
 import com.gianprog.cursomc.domain.Estado;
+import com.gianprog.cursomc.domain.ItemPedido;
 import com.gianprog.cursomc.domain.Pagamento;
 import com.gianprog.cursomc.domain.PagamentoComBoleto;
 import com.gianprog.cursomc.domain.PagamentoComCartao;
@@ -26,6 +27,7 @@ import com.gianprog.cursomc.repositories.CidadeRepository;
 import com.gianprog.cursomc.repositories.ClienteRepository;
 import com.gianprog.cursomc.repositories.EnderecoRepository;
 import com.gianprog.cursomc.repositories.EstadoRepository;
+import com.gianprog.cursomc.repositories.ItemPedidoRepository;
 import com.gianprog.cursomc.repositories.PagamentoRepository;
 import com.gianprog.cursomc.repositories.PedidoRepository;
 import com.gianprog.cursomc.repositories.ProdutoRepository;
@@ -56,6 +58,9 @@ public class CursomcApplication implements CommandLineRunner{
 	
 	@Autowired
 	private PedidoRepository pedidoRepository;
+
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -136,6 +141,22 @@ public class CursomcApplication implements CommandLineRunner{
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2, ped3));
 		pagamentoRepository.saveAll(Arrays.asList(pag1, pag2, pag3));
 		
+		ItemPedido ip1 = new ItemPedido(p1, ped1, 00.0, 1, 2000.0);
+		ItemPedido ip2 = new ItemPedido(p3, ped1, 00.0, 2, 80.0);
+		ItemPedido ip3 = new ItemPedido(p2, ped2, 00.0, 2, 200.0);
+		ItemPedido ip4 = new ItemPedido(p1, ped3, 00.0, 2, 4000.0);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().add(ip3);
+		ped3.getItens().add(ip4);
+		
+		p1.getItens().addAll(Arrays.asList(ip1, ip4));
+		p2.getItens().add(ip3);
+		p3.getItens().add(ip2);
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3, ip4));
+//		pedidoRepository.saveAll(Arrays.asList(ped1, ped2, ped3));
+//		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
 	}
 
 }

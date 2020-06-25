@@ -2,6 +2,8 @@ package com.gianprog.cursomc.domain;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -26,23 +29,28 @@ public class Pedido implements Serializable {
 	private Instant instante;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_endereco")
-	private Endereco endereco;
+	@JoinColumn(name = "id_endereco_de_entrega")
+	private Endereco enderecoDeEntrega;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_cliente")
 	private Cliente cliente;
 	
+	
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
 	private Pagamento pagamento;
+	
+	
+	@OneToMany(mappedBy = "id.pedido")
+	private Set<ItemPedido> itens = new HashSet<>();
 	
 	public Pedido() {
 	}
 
-	public Pedido(Integer id, Instant instante, Endereco endereco, Cliente cliente) {
+	public Pedido(Integer id, Instant instante, Endereco enderecoDeEntrega, Cliente cliente) {
 		this.id = id;
 		this.instante = instante;
-		this.endereco = endereco;
+		this.enderecoDeEntrega = enderecoDeEntrega;
 		this.cliente = cliente;
 	}
 
@@ -62,12 +70,12 @@ public class Pedido implements Serializable {
 		this.instante = instante;
 	}
 	
-	public Endereco getEndereco() {
-		return endereco;
+	public Endereco getEnderecoDeEntrega() {
+		return enderecoDeEntrega;
 	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public void setEnderecoDeEntrega(Endereco enderecoDeEntrega) {
+		this.enderecoDeEntrega = enderecoDeEntrega;
 	}
 
 	public Cliente getCliente() {
@@ -86,6 +94,10 @@ public class Pedido implements Serializable {
 		this.pagamento = pagamento;
 	}
 
+	public Set<ItemPedido> getItens() {
+		return itens;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
