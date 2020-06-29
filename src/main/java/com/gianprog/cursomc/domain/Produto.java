@@ -47,11 +47,6 @@ public class Produto implements Serializable {
 		this.preco = preco;
 	}
 
-//	@OneToMany(mappedBy = "id.produto")
-//	public Set<ItemPedido> getItemPedidoPk() {
-//		return itens;
-//	}
-
 	@JsonIgnore
 	public List<Pedido> getPedidos() {
 		List<Pedido> pedidos = new ArrayList<>();
