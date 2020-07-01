@@ -16,7 +16,7 @@ public class EnderecoService {
 	@Autowired
 	private EnderecoRepository repository;
 	
-	public List<?> findAll(){
+	public List<Endereco> findAll(){
 		return repository.findAll();
 	}
 	

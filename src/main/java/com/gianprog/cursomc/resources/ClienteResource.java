@@ -20,12 +20,12 @@ public class ClienteResource {
 	private ClienteService service;
 	
 	@GetMapping
-	public List<?> findAll(){
+	public List<Cliente> findAll(){
 		return service.findAll();
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<?> findById(@PathVariable Integer id){
+	public ResponseEntity<Cliente> findById(@PathVariable Integer id){
 		Cliente cliente = service.findById(id);
 		return ResponseEntity.ok().body(cliente);
 	}

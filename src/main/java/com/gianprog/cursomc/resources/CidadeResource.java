@@ -20,7 +20,7 @@ public class CidadeResource {
 	private CidadeService service;
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<?> findById(@PathVariable Integer id){
+	public ResponseEntity<Cidade> findById(@PathVariable Integer id){
 		Cidade cidade = service.findById(id);
 		return ResponseEntity.ok().body(cidade);
 	}

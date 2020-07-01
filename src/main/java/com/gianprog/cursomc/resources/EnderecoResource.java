@@ -20,12 +20,12 @@ public class EnderecoResource {
 	private EnderecoService service;
 	
 	@GetMapping
-	public List<?> findAlll(){
+	public List<Endereco> findAll(){
 		return service.findAll();
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<?> findById(@PathVariable Integer id){
+	public ResponseEntity<Endereco> findById(@PathVariable Integer id){
 		Endereco endereco = service.findById(id);
 		return ResponseEntity.ok().body(endereco);
 	}
