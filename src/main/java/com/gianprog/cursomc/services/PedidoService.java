@@ -18,8 +18,7 @@ public class PedidoService {
 	private PedidoRepository repository;
 	
 	public List<Pedido> findAll() {
-		List<Pedido> lista = repository.findAll();
-		return lista;
+		return repository.findAll();
 	}
 	
 	public Pedido findById(Integer id) throws ObjectNotFoundException{

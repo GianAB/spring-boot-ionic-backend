@@ -20,8 +20,9 @@ public class ClienteResource {
 	private ClienteService service;
 	
 	@GetMapping
-	public List<Cliente> findAll(){
-		return service.findAll();
+	public ResponseEntity<List<Cliente>> findAll(){
+		List<Cliente> lista = service.findAll();
+		return ResponseEntity.ok().body(lista);
 	}
 	
 	@GetMapping(value = "/{id}")

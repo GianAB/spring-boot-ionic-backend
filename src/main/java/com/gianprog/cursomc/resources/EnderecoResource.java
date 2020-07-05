@@ -20,8 +20,9 @@ public class EnderecoResource {
 	private EnderecoService service;
 	
 	@GetMapping
-	public List<Endereco> findAll(){
-		return service.findAll();
+	public ResponseEntity<List<Endereco>> findAll(){
+		List<Endereco>lista = service.findAll();
+		return ResponseEntity.ok().body(lista);
 	}
 	
 	@GetMapping(value = "/{id}")

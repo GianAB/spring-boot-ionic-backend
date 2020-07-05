@@ -18,16 +18,17 @@ public class PedidoResource {
 
 	@Autowired
 	private PedidoService service;
-	
+
+	@GetMapping
+	public ResponseEntity<List<Pedido>> findAll() {
+		List<Pedido> lista = service.findAll();
+		return ResponseEntity.ok().body(lista);
+	}
+
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Pedido> findById(@PathVariable Integer id) {
 		Pedido obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
-	
-	@GetMapping
-	public List<Pedido> findAll(){
-		List<Pedido> lista = service.findAll();
-		return lista;
-	}
+
 }

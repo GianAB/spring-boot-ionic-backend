@@ -19,8 +19,7 @@ public class CategoriaService {
 	private CategoriaRepository repository;
 	
 	public List<Categoria> findAll() {
-		List<Categoria> lista = repository.findAll();
-		return lista;
+		return repository.findAll();
 	}
 	
 	public Categoria findById(Integer id) throws ObjectNotFoundException{

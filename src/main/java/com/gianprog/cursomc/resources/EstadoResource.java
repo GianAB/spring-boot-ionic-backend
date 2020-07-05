@@ -18,15 +18,16 @@ public class EstadoResource {
 	
 	@Autowired
 	private EstadoService service;
+
+	@GetMapping
+	public ResponseEntity<List<Estado>> findAll(){
+		List<Estado> lista = service.findAll();
+		return ResponseEntity.ok().body(lista);
+	}
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Estado> findById(@PathVariable Integer id){
 		Estado estado = service.findById(id);
 		return ResponseEntity.ok().body(estado);
-	}
-	
-	@GetMapping
-	public List<Estado> findAll(){
-		return service.findAll();
 	}
 }

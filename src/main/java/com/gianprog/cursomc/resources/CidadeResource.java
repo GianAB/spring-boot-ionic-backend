@@ -19,14 +19,16 @@ public class CidadeResource {
 	@Autowired
 	private CidadeService service;
 	
+	@GetMapping
+	public ResponseEntity<List<Cidade>> findAll(){
+		List<Cidade> lista = service.findAll();
+		return ResponseEntity.ok().body(lista);
+	}
+	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Cidade> findById(@PathVariable Integer id){
 		Cidade cidade = service.findById(id);
 		return ResponseEntity.ok().body(cidade);
 	}
 	
-	@GetMapping
-	public List<Cidade> findAll(){
-		return service.findAll();
-	}
 }
