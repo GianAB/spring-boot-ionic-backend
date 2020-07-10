@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.gianprog.cursomc.domain.Categoria;
+import com.gianprog.cursomc.dto.CategoriaDTO;
 import com.gianprog.cursomc.repositories.CategoriaRepository;
 import com.gianprog.cursomc.services.exception.DataIntegrityException;
 import com.gianprog.cursomc.services.exception.ObjectNotFoundException;
@@ -20,6 +21,10 @@ public class CategoriaService {
 
 	@Autowired
 	private CategoriaRepository repository;
+
+	private Categoria fromDTO(CategoriaDTO objDto) {
+		return new Categoria(objDto.getId(), objDto.getNome());
+	}
 
 	public List<Categoria> findAll() {
 		return repository.findAll();
@@ -31,14 +36,15 @@ public class CategoriaService {
 				"Objeto não encontrado! Id: " + id + ", tipo: " + Categoria.class.getName()));
 	}
 
-	public Categoria insert(Categoria obj) {
+	public Categoria insert(CategoriaDTO objDto) {
+		Categoria obj = fromDTO(objDto);
 		obj.setId(null);
 		return repository.save(obj);
 	}
 
-	public Categoria update(Categoria obj) {
-		findById(obj.getId());
-		return obj = repository.save(obj);
+	public Categoria update(CategoriaDTO objDto) {
+		Categoria obj = fromDTO(objDto);
+		return repository.save(obj);
 	}
 
 	public void deleteById(Integer id) {
