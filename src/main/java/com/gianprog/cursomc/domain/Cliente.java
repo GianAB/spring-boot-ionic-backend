@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gianprog.cursomc.domain.enums.TipoCliente;
 
 @Entity
-public class Cliente implements Serializable{
+public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -46,7 +46,6 @@ public class Cliente implements Serializable{
 	}
 
 	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {
-		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
