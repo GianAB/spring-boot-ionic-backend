@@ -44,10 +44,12 @@ public class CategoriaService {
 
 	public Categoria update(CategoriaDTO objDto) {
 		Categoria obj = fromDTO(objDto);
-		return repository.save(obj);
+		Categoria newObj = findById(obj.getId());
+		updateData(newObj, obj);
+		return repository.save(newObj);
 	}
 
-	public void deleteById(Integer id) {
+		public void deleteById(Integer id) {
 		findById(id);
 		try {
 			repository.deleteById(id);
@@ -61,4 +63,10 @@ public class CategoriaService {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repository.findAll(pageRequest);
 	}
+	
+	private void updateData(Categoria newObj, Categoria obj) {
+		newObj.setNome(obj.getNome());
+	}
+
+
 }

@@ -23,8 +23,7 @@ public class ClienteService {
 	private ClienteRepository repository;
 	
 	private Cliente fromDto(ClienteDTO objDto) {
-		Cliente obj = new Cliente(objDto.getId(), objDto.getNome(), objDto.getEmail(),
-				objDto.getCpfOuCnpj(), objDto.getTipo());
+		Cliente obj = new Cliente(objDto.getId(), objDto.getNome(), objDto.getEmail(), null, null);
 		return obj;
 	}
 	
@@ -47,7 +46,7 @@ public class ClienteService {
 	public Cliente update(ClienteDTO objDto) {
 		Cliente obj = fromDto(objDto);
 		Cliente newObj = findById(obj.getId());
-		newObj = updateData(newObj, obj);
+		updateData(newObj, obj);
 		return repository.save(newObj);
 	}
 
@@ -66,12 +65,14 @@ public class ClienteService {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repository.findAll(pageRequest);
 	}
-	
-	private Cliente updateData(Cliente newObj, Cliente obj) {
-		newObj.setNome((obj.getNome() != null)?obj.getNome():newObj.getNome());
-		newObj.setEmail((obj.getEmail() != null)?obj.getEmail():newObj.getEmail());
-		newObj.setCpfOuCnpj((obj.getCpfOuCnpj() != null)?obj.getCpfOuCnpj():newObj.getCpfOuCnpj());
-		newObj.setTipo((obj.getTipo() != null)?obj.getTipo():newObj.getTipo());
-		return newObj;
+
+	private void updateData(Cliente newObj, Cliente obj) {
+		/*
+		 * Nesta situação, estamos supondo que não é possível mudar o CPF/CNPJ e nem
+		 * o tipo de pessoa de um cliente porém, ele pode mudar seu nome e email
+		 */
+		
+		newObj.setNome(obj.getNome());
+		newObj.setEmail(obj.getEmail());
 	}
 }
