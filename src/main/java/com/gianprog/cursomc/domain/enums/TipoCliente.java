@@ -3,7 +3,7 @@ package com.gianprog.cursomc.domain.enums;
 public enum TipoCliente {
 	PESSOA_FISICA(1, "Pessoa Física"), PESSOA_JURIDICA(2, "Pessoa Jurídica");
 
-	private int cod;
+	private Integer cod;
 	private String descricao;
 
 	private TipoCliente(int cod, String descricao) {
@@ -24,7 +24,7 @@ public enum TipoCliente {
 		throw new IllegalArgumentException("Código inválido: " + cod);
 	}
 	
-	public int getCod() {
+	public Integer getCod() {
 		return cod;
 	}
 	

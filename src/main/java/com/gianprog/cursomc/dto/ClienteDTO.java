@@ -9,7 +9,6 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import com.gianprog.cursomc.domain.Cliente;
-import com.gianprog.cursomc.domain.enums.TipoCliente;
 
 public class ClienteDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -24,10 +23,6 @@ public class ClienteDTO implements Serializable {
 	@Email(message = "Email inválido!")
 	private String email;
 	
-	private String cpfOuCnpj;
-	private Integer tipo;
-	
-	
 	public ClienteDTO() {
 	}
 
@@ -35,8 +30,6 @@ public class ClienteDTO implements Serializable {
 		this.id = cliente.getId();
 		this.nome = cliente.getNome();
 		this.email = cliente.getEmail();
-		this.cpfOuCnpj = cliente.getCpfOuCnpj();
-		this.tipo = cliente.getTipo().getCod();
 	}
 
 	public Integer getId() {
@@ -61,22 +54,6 @@ public class ClienteDTO implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getCpfOuCnpj() {
-		return cpfOuCnpj;
-	}
-
-	public void setCpfOuCnpj(String cpfOuCnpj) {
-		this.cpfOuCnpj = cpfOuCnpj;
-	}
-
-	public TipoCliente getTipo() {
-		return TipoCliente.toEnum(tipo);
-	}
-
-	public void setTipo(Integer tipo) {
-		this.tipo = tipo;
 	}
 
 }
