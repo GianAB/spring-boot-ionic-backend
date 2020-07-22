@@ -26,7 +26,7 @@ public class Cliente implements Serializable {
 	private Integer id;
 	
 	private String nome;
-	private String email  ;
+	private String email;
 	private String cpfOuCnpj;
 	private Integer tipo;
 	
@@ -100,7 +100,7 @@ public class Cliente implements Serializable {
 	public Set<String> getTelefones() {
 		return telefones;
 	}
-
+	
 	public List<Pedido> getPedidos() {
 		return pedidos;
 	}

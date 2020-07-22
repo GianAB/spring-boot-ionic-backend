@@ -22,6 +22,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.gianprog.cursomc.domain.Cliente;
 import com.gianprog.cursomc.dto.ClienteDTO;
+import com.gianprog.cursomc.dto.ClienteNewDTO;
 import com.gianprog.cursomc.services.ClienteService;
 
 @RestController
@@ -61,7 +62,7 @@ public class ClienteResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO objDto) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto) {
 		Cliente obj = service.insert(objDto);
 		URI uri = ServletUriComponentsBuilder // Implementação padrão
 					.fromCurrentRequest() // Pegar a RequestMapping atual
