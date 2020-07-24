@@ -6,11 +6,16 @@ import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
 
+import com.gianprog.cursomc.services.validator.ClienteInsert;
+
+@ClienteInsert
 public class ClienteNewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String nome;
 	private String email;
+	
+	
 	private String cpfOuCnpj;
 	private Integer tipo;
 
