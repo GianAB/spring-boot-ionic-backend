@@ -32,9 +32,9 @@ public class ClienteService {
 	private EnderecoRepository enderecoRepository;
 	
 
-	private Cliente fromDto(ClienteDTO objDto) {
-		return new Cliente(objDto.getId(), objDto.getNome(), objDto.getEmail(), null, null);
-	}
+//	private Cliente fromDto(ClienteDTO objDto) {
+//		return new Cliente(objDto.getId(), objDto.getNome(), objDto.getEmail(), null, null);
+//	}
 
 	private Cliente fromDto(ClienteNewDTO objDto) {
 		Cliente cli = new Cliente(null, objDto.getNome(), objDto.getEmail(), objDto.getCpfOuCnpj(),
@@ -74,11 +74,12 @@ public class ClienteService {
 		return obj;
 	}
 
-	public Cliente update(ClienteDTO objDto) {
-		Cliente obj = fromDto(objDto);
-		Cliente newObj = findById(obj.getId());
-		updateData(newObj, obj);
-		return repository.save(newObj);
+	public Cliente update(Integer id, ClienteDTO objDto) {
+		objDto.setId(id);
+		
+		Cliente findObj = findById(id);
+		
+		return repository.save(updateData(objDto, findObj));
 	}
 
 	public void deleteById(Integer id) {
@@ -96,13 +97,14 @@ public class ClienteService {
 		return repository.findAll(pageRequest);
 	}
 
-	private void updateData(Cliente newObj, Cliente obj) {
-		/*
-		 * Nesta situação, estamos supondo que não é possível mudar o CPF/CNPJ e nem o
-		 * tipo de pessoa de um cliente porém, ele pode mudar seu nome e email
-		 */
-
-		newObj.setNome(obj.getNome());
-		newObj.setEmail(obj.getEmail());
+	private Cliente updateData(ClienteDTO objDto, Cliente findObj) {
+		findObj.setNome((objDto.getNome() != null)?objDto.getNome():findObj.getNome());
+		findObj.setEmail((objDto.getEmail() != null)?objDto.getEmail():findObj.getEmail());
+		if (!objDto.getTelefones().isEmpty()) {
+			findObj.getTelefones().removeAll(findObj.getTelefones());
+			findObj.getTelefones().addAll(objDto.getTelefones());
+		}
+		
+		return findObj;
 	}
 }

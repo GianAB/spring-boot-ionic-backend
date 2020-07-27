@@ -2,9 +2,10 @@
 package com.gianprog.cursomc.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -15,13 +16,13 @@ public class ClienteDTO implements Serializable {
 
 	private Integer id;
 	
-	@NotEmpty(message = "Este campo não pode estar vazio!")
 	@Length(min = 5, max = 30, message = "Este campo deve conter entre 5 e 30 caracteres!")
 	private String nome;
 	
-	@NotEmpty(message = "Este campo não pode estar vazio!")
 	@Email(message = "Email inválido!")
 	private String email;
+	
+	private List<String> telefones = new ArrayList<>();
 	
 	public ClienteDTO() {
 	}
@@ -54,6 +55,18 @@ public class ClienteDTO implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public List<String> getTelefones() {
+		return telefones;
+	}
+
+	public void setTelefones(List<String> telefones) {
+		while(telefones.size() > 3) {
+			telefones.remove(telefones.size() -1);
+		}
+		
+		this.telefones = telefones;
 	}
 
 }

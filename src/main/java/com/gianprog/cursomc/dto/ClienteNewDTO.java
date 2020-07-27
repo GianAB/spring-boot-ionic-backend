@@ -4,7 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
 
 import com.gianprog.cursomc.services.validator.ClienteInsert;
 
@@ -12,8 +15,14 @@ import com.gianprog.cursomc.services.validator.ClienteInsert;
 public class ClienteNewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@NotEmpty(message = "Este campo não pode estar vazio!")
+	@Length(min = 5, max = 30, message = "Este campo deve conter entre 5 e 30 caracteres!")
 	private String nome;
+	
+	@NotEmpty(message = "Este campo não pode estar vazio!")
+	@Email(message = "Email inválido!")
 	private String email;
+	
 	private String cpfOuCnpj;
 	private Integer tipo;
 
