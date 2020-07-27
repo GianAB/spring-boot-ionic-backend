@@ -67,8 +67,9 @@ public class ClienteService {
 		Cliente obj = fromDto(objDto);
 		obj.setId(null);
 		
-		enderecoRepository.saveAll(obj.getEnderecos());
 		repository.save(obj);
+		
+		enderecoRepository.saveAll(obj.getEnderecos());
 		
 		return obj;
 	}

@@ -14,8 +14,6 @@ public class ClienteNewDTO implements Serializable {
 
 	private String nome;
 	private String email;
-	
-	
 	private String cpfOuCnpj;
 	private Integer tipo;
 
