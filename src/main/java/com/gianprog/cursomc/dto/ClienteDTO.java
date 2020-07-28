@@ -10,7 +10,9 @@ import javax.validation.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
 import com.gianprog.cursomc.domain.Cliente;
+import com.gianprog.cursomc.services.validator.ClienteUpdate;
 
+@ClienteUpdate
 public class ClienteDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
