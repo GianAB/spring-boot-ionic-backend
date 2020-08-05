@@ -34,7 +34,7 @@ public class ProdutoService {
 		PageRequest request = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		List<Categoria> categorias = categoriaRepository.findAllById(ids);
 		
-		return repository.findDistinctByNomeContainingAndCategoriasIn(nome, categorias, request);
+		return repository.findDistinctByNomeContainingIgnoreCaseAndCategoriasIn(nome, categorias, request);
 	}
 	
 }

@@ -138,23 +138,4 @@ public class Endereco implements Serializable {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Endereco [id=");
-		builder.append(id);
-		builder.append(", logradouro=");
-		builder.append(logradouro);
-		builder.append(", numero=");
-		builder.append(numero);
-		builder.append(", complemento=");
-		builder.append(complemento);
-		builder.append(", bairro=");
-		builder.append(bairro);
-		builder.append(", cep=");
-		builder.append(cep);
-		builder.append("]");
-		return builder.toString();
-	}
-
 }

@@ -15,6 +15,6 @@ import com.gianprog.cursomc.domain.Produto;
 public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
 	
 	@Transactional(readOnly = true)
-	Page<Produto> findDistinctByNomeContainingAndCategoriasIn(String nome, List<Categoria> categorias, Pageable request);
+	Page<Produto> findDistinctByNomeContainingIgnoreCaseAndCategoriasIn(String nome, List<Categoria> categorias, Pageable request);
 	
 }

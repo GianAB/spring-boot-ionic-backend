@@ -31,11 +31,6 @@ public class ClienteService {
 	@Autowired
 	private EnderecoRepository enderecoRepository;
 	
-
-//	private Cliente fromDto(ClienteDTO objDto) {
-//		return new Cliente(objDto.getId(), objDto.getNome(), objDto.getEmail(), null, null);
-//	}
-
 	private Cliente fromDto(ClienteNewDTO objDto) {
 		Cliente cli = new Cliente(null, objDto.getNome(), objDto.getEmail(), objDto.getCpfOuCnpj(),
 				TipoCliente.toEnum(objDto.getTipo()));

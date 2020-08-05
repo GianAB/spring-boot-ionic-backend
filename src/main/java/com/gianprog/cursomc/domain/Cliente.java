@@ -134,22 +134,5 @@ public class Cliente implements Serializable {
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Cliente [id=");
-		builder.append(id);
-		builder.append(", nome=");
-		builder.append(nome);
-		builder.append(", email=");
-		builder.append(email);
-		builder.append(", cpfOuCnpj=");
-		builder.append(cpfOuCnpj);
-		builder.append(", tipo=");
-		builder.append(tipo);
-		builder.append("]");
-		return builder.toString();
-	}
 	
 }

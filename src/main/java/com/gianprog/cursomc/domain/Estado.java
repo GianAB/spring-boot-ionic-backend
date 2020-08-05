@@ -79,15 +79,4 @@ public class Estado implements Serializable {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Estado [id=");
-		builder.append(id);
-		builder.append(", nome=");
-		builder.append(nome);
-		builder.append("]");
-		return builder.toString();
-	}
-
 }

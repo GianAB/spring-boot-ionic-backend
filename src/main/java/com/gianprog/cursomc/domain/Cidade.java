@@ -82,15 +82,4 @@ public class Cidade implements Serializable {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Cidade [id=");
-		builder.append(id);
-		builder.append(", nome=");
-		builder.append(nome);
-		builder.append("]");
-		return builder.toString();
-	}
-
 }
