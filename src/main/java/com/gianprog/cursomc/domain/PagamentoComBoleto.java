@@ -4,21 +4,24 @@ import java.time.LocalDate;
 
 import javax.persistence.Entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.gianprog.cursomc.domain.enums.EstadoPagamento;
 
 @Entity
+@JsonTypeName("pagamentoComBoleto")
 public class PagamentoComBoleto extends Pagamento {
 	private static final long serialVersionUID = 1L;
 
 
-//	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm", timezone = "GMT-3")
-//	@DateTimeFormat(pattern = "dd/MM/yyyy", iso = ISO.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy", iso = ISO.DATE)
 	private LocalDate dataVencimento;
 
 
 
-//	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm", timezone = "GMT-3")
-//	@DateTimeFormat(pattern = "dd/MM/yyyy", iso = ISO.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy", iso = ISO.DATE)
 	private LocalDate dataPagamento;
 
 	public PagamentoComBoleto() {
