@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +34,12 @@ public class PedidoService {
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
 	
+	@Autowired
+	private ProdutoService produtoService;
+	
+	@Autowired
+	private ClienteService clienteService;
+	
 	public List<Pedido> findAll() {
 		return repository.findAll();
 	}
@@ -42,29 +50,28 @@ public class PedidoService {
 				 "Objeto não encontrado! Id: " + id + ", tipo: " + Pedido.class.getName()));
 	}
 
+	@Transactional
 	public Pedido insert(Pedido obj) {
 		obj.setId(null);
+		obj.setCliente(clienteService.findById(obj.getCliente().getId()));
 		obj.setInstante(Instant.now());
 		obj.getPagamento().setEstadoPagamento(EstadoPagamento.PENDENTE);
 		obj.getPagamento().setPedido(obj);
-		
 		if (obj.getPagamento() instanceof PagamentoComBoleto) {
 			LocalDate instante = LocalDate.parse(obj.getInstante().toString().substring(0,10));
 			PagamentoComBoleto pgto = (PagamentoComBoleto) obj.getPagamento();
-
 			boletoService.preencherPagamentoComBoleto(pgto, instante);
 		}
-		
-		
 		obj = repository.save(obj);
 		pagamentoRepository.save(obj.getPagamento());
 		
 		for(ItemPedido ip: obj.getItens()) {
 			ip.setDesconto(0.0);
 			ip.setPedido(obj);
+			ip.setProduto(produtoService.findById(ip.getProduto().getId()));
 		}
-		
 		itemPedidoRepository.saveAll(obj.getItens());
+		System.out.println(obj);
 		
 		return obj;
 	}
