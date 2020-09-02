@@ -40,6 +40,9 @@ public class PedidoService {
 	@Autowired
 	private ClienteService clienteService;
 	
+	@Autowired
+	private EmailService emailService;
+	
 	public List<Pedido> findAll() {
 		return repository.findAll();
 	}
@@ -71,7 +74,7 @@ public class PedidoService {
 			ip.setProduto(produtoService.findById(ip.getProduto().getId()));
 		}
 		itemPedidoRepository.saveAll(obj.getItens());
-		System.out.println(obj);
+		emailService.sendOrderConfirmationEmail(obj);
 		
 		return obj;
 	}

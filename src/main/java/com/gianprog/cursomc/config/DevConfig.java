@@ -25,7 +25,7 @@ public class DevConfig {
 			return false;
 		}
 		
-		dbService.instanciateTestBadabase();
+		dbService.instanciateTestDatabase();
 		return true;
 	}
 }
