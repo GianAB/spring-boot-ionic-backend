@@ -13,6 +13,9 @@ public class URL {
 	}
 	
 	public static String decodeParam(String s) {
+		if(s == null) {
+			return "";
+		}
 		try {
 			return URLDecoder.decode(s, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
