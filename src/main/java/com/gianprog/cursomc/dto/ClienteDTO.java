@@ -9,6 +9,7 @@ import javax.validation.constraints.Email;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gianprog.cursomc.domain.Cliente;
 import com.gianprog.cursomc.services.validator.ClienteUpdate;
 
@@ -58,7 +59,8 @@ public class ClienteDTO implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	
+	@JsonIgnore
 	public List<String> getTelefones() {
 		return telefones;
 	}
