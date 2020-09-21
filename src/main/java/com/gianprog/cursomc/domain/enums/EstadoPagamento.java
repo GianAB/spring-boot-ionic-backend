@@ -27,17 +27,8 @@ public enum EstadoPagamento {
 	public Integer getCod() {
 		return cod;
 	}
-
-	public void setCod(Integer cod) {
-		this.cod = cod;
-	}
-
+	
 	public String getValor() {
 		return valor;
 	}
-
-	public void setValor(String valor) {
-		this.valor = valor;
-	}
-
 }

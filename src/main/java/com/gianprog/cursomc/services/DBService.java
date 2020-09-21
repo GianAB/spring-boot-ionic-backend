@@ -20,6 +20,7 @@ import com.gianprog.cursomc.domain.PagamentoComCartao;
 import com.gianprog.cursomc.domain.Pedido;
 import com.gianprog.cursomc.domain.Produto;
 import com.gianprog.cursomc.domain.enums.EstadoPagamento;
+import com.gianprog.cursomc.domain.enums.Perfil;
 import com.gianprog.cursomc.domain.enums.TipoCliente;
 import com.gianprog.cursomc.repositories.CategoriaRepository;
 import com.gianprog.cursomc.repositories.CidadeRepository;
@@ -122,9 +123,10 @@ public class DBService {
 		cidadeRepository.saveAll(Arrays.asList(cid1, cid2, cid3));
 
 		Cliente cli1 = new Cliente(null, "gian", "gian.antoniobatista@gmail.com", "03100066697", TipoCliente.PESSOA_FISICA, pe.encode("1233"));
+		cli1.addPerfil(Perfil.ADMIN);
 		Cliente cli2 = new Cliente(null, "jade", "jade@gmail.com", "03166666697", TipoCliente.PESSOA_FISICA, pe.encode("nãosei"));
-		Cliente cli3 = new Cliente(null, "maique", "maique@gmail.com", "69800066697", TipoCliente.PESSOA_JURIDICA, pe.encode("minhasenhafácil"));
-
+		Cliente cli3 = new Cliente(null, "maique", "maique@gmail.com", "69800066697", TipoCliente.PESSOA_JURIDICA, pe.encode("minhasenhafácil"));		
+		
 		Endereco end1 = new Endereco(null, "Rua q", "100", "casa 2", "Centro", "39855-0000", cli2, cid1);
 		Endereco end2 = new Endereco(null, "Rua zero", "2", null, "Centro", "39855-0000", cli1, cid1);
 		Endereco end3 = new Endereco(null, "Av. rio", "12", null, "Centro", "39855-0000", cli1, cid2);
