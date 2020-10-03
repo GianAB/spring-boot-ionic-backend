@@ -58,7 +58,6 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(listaDto);
 	}
 	
-	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Cliente> findById(@PathVariable Integer id) {
 		Cliente cliente = service.findById(id);
