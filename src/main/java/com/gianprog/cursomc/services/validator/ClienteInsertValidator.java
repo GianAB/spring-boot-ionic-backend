@@ -45,7 +45,7 @@ public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert
 		for (FieldMessage e : list) {
 			context.disableDefaultConstraintViolation();
 			context.buildConstraintViolationWithTemplate(e.getMessage())
-				.addPropertyNode(e.getfieldName()).addConstraintViolation();
+				.addPropertyNode(e.getFieldName()).addConstraintViolation();
 
 		}
 		return list.isEmpty();
